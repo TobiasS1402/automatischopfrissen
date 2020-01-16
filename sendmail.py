@@ -12,5 +12,5 @@ def mailfunctie(SUBJECT, TEXT):
     server = smtplib.SMTP('smtp.office365.com', 587)
     server.starttls()
     server.login(office365Usr, office365Pass)
-    server.sendmail(office365Usr,'toseijs@gmail.com',message)
+    server.sendmail(office365Usr,'frisdrankautomaat@hogeschoolutrecht.onmicrosoft.com',message)
     server.quit()
