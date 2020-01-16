@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel='icon' href='favicon.png' type='image/x-icon'/>
 <title>Frisdrankautomaat webpagina</title>
 <style>
-    table {
+table.table1 {
 float: left;
 border-collapse: collapse;
 width: 49%;
@@ -15,6 +16,14 @@ text-align: center;
 margin: 9px;
 }
 
+img {
+height: 700px;
+position: relative;
+left: 60px;
+top: 55px;
+}
+
+
 th {
 background-color: #588c7e;
 color: #FFE4E1;
@@ -24,6 +33,9 @@ caption {
 font-size: 40px;
 }
 
+body {
+background-color: #ffcaca;
+}
 tr:nth-child(even) {background-color: #f2f2f2}
 </style>
 </head>
@@ -42,7 +54,7 @@ $query1 = ("select voorraad.productnaam, mutatie.datum, mutatie.tijd from mutati
 $result = $con->query($query);
 $result1 = $con->query($query1);
 ?>
-<table>
+<table class="table1">
 <caption>Voorraad database</caption>
 <tr>
     <th>Id</th>
@@ -57,7 +69,7 @@ $result1 = $con->query($query1);
 	}
 ?>
 </table>
-<table>
+<table class=table1>
 <caption>Mutatie database: laatste 10 mutaties</caption>
 <tr>
     <th>Product</th>
@@ -72,6 +84,6 @@ $result1 = $con->query($query1);
 	mysqli_close($con);
 ?>
 </table>
-</body>        
+<img src="favicon.png">
+</body>
 </html>
-
