@@ -4,6 +4,7 @@
 <link rel='icon' href='favicon.png' type='image/x-icon'/>
 <title>Frisdrankautomaat webpagina</title>
 <style>
+	
 table.table1 {
 float: left;
 border-collapse: collapse;
@@ -18,11 +19,10 @@ margin: 9px;
 
 img {
 height: 700px;
-position: relative;
-left: 60px;
-top: 55px;
+position: absolute;
+left: 53%;
+top: 8%;
 }
-
 
 th {
 background-color: #588c7e;
@@ -31,6 +31,21 @@ color: #FFE4E1;
 
 caption {
 font-size: 40px;
+}
+
+.button {
+background-color: #588c7e;
+border: none;
+color: white;
+padding: 15px 32px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 16px;
+position: absolute;
+top: 9%;
+left: 71%;
+cursor: pointer;
 }
 
 body {
@@ -85,5 +100,6 @@ $result1 = $con->query($query1);
 ?>
 </table>
 <img src="favicon.png">
+<a href="voorraad.php" class="button">voorraad aanpassen</a>
 </body>
 </html>
