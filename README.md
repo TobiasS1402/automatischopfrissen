@@ -1,5 +1,5 @@
 # automatischopfrissen
-PTW project automatisch opfrissen. Een repository door Tobias Seijsener.
+PTW project automatisch opfrissen. Een repository door Tobias.
 Op dit moment zijn er enkele files, die ga ik hieronder toelichten.
 
 dbconnect.py: standard database verbinding voor SELECT queries.
