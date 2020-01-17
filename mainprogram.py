@@ -27,7 +27,8 @@ def getdate():
 	return date.strftime("%Y:%m:%d")	
 
 def maintenance():
-	mailfunctie("Maintenance herinnering frisdrankautomaat " + getdate(), "Beste gebruiker,/n er is een maand verstreken. Wij willen u aanraden om uw frisdrankautomaat te reinigen / onder maintenance te nemen.\nVoor de nieuw onderdelen kunt u op onze website terecht.\nDeze mail is automatisch gegenereerd", office365Usr, office365Pass)
+	datemail = datetime.strptime(getdate(),"%Y:%m:%d").strftime("%d-%m-%Y")
+	mailfunctie("Maintenance herinnering frisdrankautomaat " + datemail, "Beste gebruiker,\n er is een maand verstreken. Wij willen u aanraden om uw frisdrankautomaat te reinigen / onder maintenance te nemen.\nVoor nieuwe onderdelen kunt u op onze website terecht.\nDit is een automatisch gegenereerde e-mail.", office365Usr, office365Pass)
 
 def voorraadcontrole():
 	voorraad = connector("SELECT * FROM voorraad")
@@ -37,7 +38,7 @@ def voorraadcontrole():
 		product_aantal = x[2]
 		product_prijs = x[3]
 		if product_aantal < 4:
-			mailfunctie("Product bijna op: "+product_naam, "Beste gebruiker,\n uw "+ product_naam +" is bijna op.\n Er zijn nog maar "+ str(product_aantal) +" over. Vul deze zo snel mogelijk bij.\n Dit is een automatisch gegenereerde e-mail.", office365Usr, office365Pass)
+			mailfunctie("Product bijna op: "+product_naam, "Beste gebruiker,\nuw "+ product_naam +" is bijna op.\nEr zijn nog maar "+ str(product_aantal) +" over. Vul deze zo snel mogelijk bij.\nDit is een automatisch gegenereerde e-mail.", office365Usr, office365Pass)
 
 			
 def cocacolaLight():
