@@ -1,5 +1,6 @@
 import time
-import RPI.GPIO as GPIO
+import RPi.GPIO as GPIO
+from getpass import getpass
 from multiprocessing import Process
 from dbconnect import connector
 from sendmail import mailfunctie
@@ -89,6 +90,9 @@ def iceteaSparkling():
 	updatevoorraad = y-1
 	print(updatevoorraad)
 	connectorupdate("UPDATE voorraad SET voorraadaantal = '%s' WHERE productid = 123461" % (updatevoorraad))
+
+office365Usr = input("Geef hier je gebruikersnaam op: ")
+office365Pass = getpass("Geef hier je Office365 password op: ")
 
 def voorraadloop():
 	while True:
