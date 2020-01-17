@@ -20,7 +20,7 @@ GPIO.setup(22, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 def gettime():
 	time = datetime.now()
-	return time.strftime("%H:%M")
+	return time.strftime("%H:%M:%S")
 
 def getdate():
 	date = datetime.today()
@@ -122,8 +122,8 @@ def voorraadloop():
 	
 def controleloop():
 	while True:
-	voorraadcontrole()
-	time.sleep(1800)
+		voorraadcontrole()
+		time.sleep(1800)
 
 if __name__ == '__main__':
         Process(target=voorraadloop).start()
