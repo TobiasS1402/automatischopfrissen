@@ -34,7 +34,7 @@ def voorraadcontrole():
 		product_aantal = x[2]
 		product_prijs = x[3]
 		if product_aantal < 4:
-			mailfunctie("Product bijna op: "+product_naam, "Beste gebruiker,\n uw "+ product_naam +" is bijna op.\n Er zijn nog maar "+ str(product_aantal) +" over. Vul deze zo snel mogelijk bij.\n Dit is een automatisch gegenereerde e-mail.")
+			mailfunctie("Product bijna op: "+product_naam, "Beste gebruiker,\n uw "+ product_naam +" is bijna op.\n Er zijn nog maar "+ str(product_aantal) +" over. Vul deze zo snel mogelijk bij.\n Dit is een automatisch gegenereerde e-mail.", office365Usr, office365Pass)
 
 			
 def cocacolaLight():
