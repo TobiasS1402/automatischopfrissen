@@ -135,6 +135,6 @@ def maintenanceloop():
 		#sleep timer van een maand, na deze timer wordt er een mail verstuurd ter herinnering van maintenance.
 		
 if __name__ == '__main__':
-        Process(target=voorraadloop).start()
-        Process(target=controleloop).start()
+	Process(target=voorraadloop).start()
+	Process(target=controleloop).start()
 	Process(target=maintenanceloop).start()
