@@ -64,7 +64,7 @@ if($con->connect_error){
 }
 // sql query
 $query = ("select * from voorraad ORDER BY voorraadaantal ASC");
-$query1 = ("select voorraad.productnaam, mutatie.datum, mutatie.tijd from mutatie INNER JOIN voorraad ON mutatie.productid = voorraad.productid ORDER BY datum ASC LIMIT 10");
+$query1 = ("select voorraad.productnaam, mutatie.datum, mutatie.tijd from mutatie INNER JOIN voorraad ON mutatie.productid = voorraad.productid ORDER BY tijd ASC LIMIT 10");
 
 $result = $con->query($query);
 $result1 = $con->query($query1);
@@ -89,7 +89,7 @@ $result1 = $con->query($query1);
 <tr>
     <th>Product</th>
     <th>Datum</th>
-    <th>Naam</th>
+    <th>Tijd</th>
 </tr>
 
 <?php
