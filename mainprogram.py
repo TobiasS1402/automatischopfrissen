@@ -1,4 +1,5 @@
-#import RPI.GPIO as GPIO
+import time
+import RPI.GPIO as GPIO
 from dbconnect import connector
 from sendmail import mailfunctie
 from datetime import datetime
@@ -51,11 +52,37 @@ def cocacolaZero():
 	print(updatevoorraad)
 	connectorupdate("UPDATE voorraad SET voorraadaantal = '%s' WHERE productid = 123458" % (updatevoorraad))
 
-if input("wil je de mailfunctie testen?")  == "ja":
-	voorraadcontrole()
-elif input("Wil je de drankfuncties testen?") == "ja":
-	cocacolaLight()
-	cocacolaRegular()
-	cocacolaZero()
-else:
-	raise exit()
+	
+GPIO.setwarnings(False) # Ignore warning for now
+GPIO.setmode(GPIO.BOARD) # Use physical pin numbering
+GPIO.setup(8, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(10, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(12, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(16, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(18, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(22, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+
+while True:
+        if GPIO.input(8) == True:
+                voorraadcontrole()
+                time.sleep(1)
+
+        elif GPIO.input(10) == True:
+                cocacolaRegular()
+                time.sleep(1)
+
+        elif GPIO.input(12) == True:
+                cocacolaLight()
+                time.sleep(1)
+
+        elif GPIO.input(16) == True:
+                cocacolaZero()
+                time.sleep(1)
+
+        elif GPIO.input(18) == True:
+                #cocacolaLight()
+                time.sleep(1)
+
+        elif GPIO.input(22) == True:
+                #cocacolaZero()
+                time.sleep(1)
