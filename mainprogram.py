@@ -1,10 +1,21 @@
 import time
 import RPI.GPIO as GPIO
+from multiprocessing import Process
 from dbconnect import connector
 from sendmail import mailfunctie
 from datetime import datetime
 from dbconnect_insert import connectorinsert
 from dbconnect_update import connectorupdate
+
+#RASPBERRY PI GPIO PIN SETTINGS
+GPIO.setwarnings(False) # Ignore warning for now
+GPIO.setmode(GPIO.BOARD) # Use physical pin numbering
+GPIO.setup(8, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(10, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(12, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(16, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(18, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(22, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 def gettime():
 	time = datetime.now()
@@ -52,37 +63,64 @@ def cocacolaZero():
 	print(updatevoorraad)
 	connectorupdate("UPDATE voorraad SET voorraadaantal = '%s' WHERE productid = 123458" % (updatevoorraad))
 
+def fantaOrange():
+	connectorinsert("INSERT INTO mutatie (productid, datum, tijd) VALUES (%s, %s, %s)", (123459, getdate(), gettime()))
+	voorraad = connector("select voorraadaantal FROM voorraad WHERE productid = 123459")
+	for x in voorraad:
+		y = int(''.join(map(str,x)))
+	updatevoorraad = y-1
+	print(updatevoorraad)
+	connectorupdate("UPDATE voorraad SET voorraadaantal = '%s' WHERE productid = 123459" % (updatevoorraad))
+
+def fantaCassis():
+	connectorinsert("INSERT INTO mutatie (productid, datum, tijd) VALUES (%s, %s, %s)", (123460, getdate(), gettime()))
+	voorraad = connector("select voorraadaantal FROM voorraad WHERE productid = 123460")
+	for x in voorraad:
+		y = int(''.join(map(str,x)))
+	updatevoorraad = y-1
+	print(updatevoorraad)
+	connectorupdate("UPDATE voorraad SET voorraadaantal = '%s' WHERE productid = 123460" % (updatevoorraad))
+
+def iceteaSparkling():
+	connectorinsert("INSERT INTO mutatie (productid, datum, tijd) VALUES (%s, %s, %s)", (123461, getdate(), gettime()))
+	voorraad = connector("select voorraadaantal FROM voorraad WHERE productid = 123461")
+	for x in voorraad:
+		y = int(''.join(map(str,x)))
+	updatevoorraad = y-1
+	print(updatevoorraad)
+	connectorupdate("UPDATE voorraad SET voorraadaantal = '%s' WHERE productid = 123461" % (updatevoorraad))
+
+def voorraadloop():
+	while True:
+		if GPIO.input(8) == True:
+			cocacolaRegular()
+			time.sleep(1)
+
+		elif GPIO.input(10) == True:
+			cocacolaLight()
+			time.sleep(1)
+
+		elif GPIO.input(12) == True:
+			cocacolaZero()
+			time.sleep(1)
+
+		elif GPIO.input(16) == True:
+			fantaOrange()
+			time.sleep(1)
+
+		elif GPIO.input(18) == True:
+			fantaCassis()
+			time.sleep(1)
+
+		elif GPIO.input(22) == True:
+			iceteaSparkling()
+			time.sleep(1)
 	
-GPIO.setwarnings(False) # Ignore warning for now
-GPIO.setmode(GPIO.BOARD) # Use physical pin numbering
-GPIO.setup(8, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-GPIO.setup(10, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-GPIO.setup(12, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-GPIO.setup(16, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-GPIO.setup(18, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-GPIO.setup(22, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+def controleloop():
+	while True:
+	voorraadcontrole()
+	time.sleep(1800)
 
-while True:
-        if GPIO.input(8) == True:
-                voorraadcontrole()
-                time.sleep(1)
-
-        elif GPIO.input(10) == True:
-                cocacolaRegular()
-                time.sleep(1)
-
-        elif GPIO.input(12) == True:
-                cocacolaLight()
-                time.sleep(1)
-
-        elif GPIO.input(16) == True:
-                cocacolaZero()
-                time.sleep(1)
-
-        elif GPIO.input(18) == True:
-                #cocacolaLight()
-                time.sleep(1)
-
-        elif GPIO.input(22) == True:
-                #cocacolaZero()
-                time.sleep(1)
+if __name__ == '__main__':
+        Process(target=voorraadloop).start()
+        Process(target=controleloop).start()
