@@ -26,6 +26,9 @@ def getdate():
 	date = datetime.today()
 	return date.strftime("%Y:%m:%d")	
 
+def maintenance():
+	mailfunctie("Maintenance herinnering frisdrankautomaat " + getdate(), "Beste gebruiker,/n er is een maand verstreken. Wij willen u aanraden om uw frisdrankautomaat te reinigen / onder maintenance te nemen.\nVoor de nieuw onderdelen kunt u op onze website terecht.\nDeze mail is automatisch gegenereerd", office365Usr, office365Pass)
+
 def voorraadcontrole():
 	voorraad = connector("SELECT * FROM voorraad")
 	for x in voorraad:
@@ -125,6 +128,13 @@ def controleloop():
 		voorraadcontrole()
 		time.sleep(1800)
 
+def maintenanceloop():
+	while True:
+		maintenance()
+		time.sleep(2592000)
+		#sleep timer van een maand, na deze timer wordt er een mail verstuurd ter herinnering van maintenance.
+		
 if __name__ == '__main__':
         Process(target=voorraadloop).start()
         Process(target=controleloop).start()
+	Process(target=maintenanceloop).start()
