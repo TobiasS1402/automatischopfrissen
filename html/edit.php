@@ -38,22 +38,25 @@ while($res = $result->fetch_assoc())
 <link rel='icon' href='favicon.png' type='image/x-icon'/>
 <title>Edit voorraadaantallen</title>
 </head>
+ 
 <style>
-
 form {
 float: left;
+position: absolute;
+top: 5.5%;
+left: -0.75%;
 border-collapse: collapse;
-width: 49%;
 color: #588c7e;
 font-family: monospace;
 font-size: 25px;
 border: 5px solid black;
 text-align: center;
 margin: 9px;
+background-color: #ffffff;
 }
 
 body {
-background-color: #ffcaca;
+background-color: #FFE4E1;
 }
 
 .button {
@@ -70,8 +73,12 @@ top: 0%;
 left: 0%;
 cursor: pointer;
 }
- 
-</style> 
+
+td {
+background-color: #ffffff;
+}
+
+</style>
  
 <body>
     <a href="index.php" class=button>Home</a>
