@@ -33,21 +33,6 @@ caption {
 font-size: 40px;
 }
 
-.button {
-background-color: #588c7e;
-border: none;
-color: white;
-padding: 15px 32px;
-text-align: center;
-text-decoration: none;
-display: inline-block;
-font-size: 16px;
-position: absolute;
-top: 9%;
-left: 71%;
-cursor: pointer;
-}
-
 body {
 background-color: #ffcaca;
 }
@@ -64,7 +49,7 @@ if($con->connect_error){
 }
 // sql query
 $query = ("select * from voorraad ORDER BY voorraadaantal ASC");
-$query1 = ("select voorraad.productnaam, mutatie.datum, mutatie.tijd from mutatie INNER JOIN voorraad ON mutatie.productid = voorraad.productid ORDER BY mutatie.datum DESC, mutatie.tijd DESC limit 10");
+$query1 = ("select voorraad.productnaam, mutatie.datum, mutatie.tijd from mutatie INNER JOIN voorraad ON mutatie.productid = voorraad.productid ORDER BY mutatie.datum DESC, mutatie.tijd DESC");
 
 $result = $con->query($query);
 $result1 = $con->query($query1);
@@ -76,12 +61,18 @@ $result1 = $con->query($query1);
     <th>Naam</th>
     <th>Aantal</th>
     <th>Prijs</th>
+    <th>Acties</th>
 </tr>
 
 <?php
 	while($row = $result->fetch_assoc()) {
-	echo "<tr><td>" . $row["productid"]. "</td><td>" . $row["productnaam"] . "</td><td>" . $row["voorraadaantal"] . "</td><td>" . $row["prijs"]. "</td></tr>";
-	}
+	echo "<tr>";
+	echo "<td>" .$row["productid"]."</td>";
+	echo "<td>" .$row["productnaam"]."</td>";
+	echo "<td>" .$row["voorraadaantal"]."</td>";
+	echo "<td>" .$row["prijs"]."</td>";
+	echo "<td><a href=\"edit.php?id=$row[productid]\"><button type='button'>Edit</button></a></tr>";
+}
 ?>
 </table>
 <table class=table1>
@@ -100,6 +91,5 @@ $result1 = $con->query($query1);
 ?>
 </table>
 <img src="favicon.png">
-<a href="voorraad.php" class="button">voorraad aanpassen</a>
 </body>
 </html>
