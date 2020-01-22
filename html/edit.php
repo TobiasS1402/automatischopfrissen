@@ -32,13 +32,49 @@ while($res = $result->fetch_assoc())
     $prijs = $res['prijs'];
 }
 ?>
+<!DOCTYPE html>
 <html>
 <head>    
-    <title>Edit Data</title>
+<link rel='icon' href='favicon.png' type='image/x-icon'/>
+<title>Edit voorraadaantallen</title>
 </head>
+<style>
+
+form {
+float: left;
+border-collapse: collapse;
+width: 49%;
+color: #588c7e;
+font-family: monospace;
+font-size: 25px;
+border: 5px solid black;
+text-align: center;
+margin: 9px;
+}
+
+body {
+background-color: #ffcaca;
+}
+
+.button {
+background-color: #588c7e;
+border: none;
+color: white;
+padding: 15px 32px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 16px;
+position: absolute;
+top: 0%;
+left: 0%;
+cursor: pointer;
+}
+ 
+</style> 
  
 <body>
-    <a href="index.php">Home</a>
+    <a href="index.php" class=button>Home</a>
     <br/><br/>
     
     <form name="form1" method="post" action="edit.php">
